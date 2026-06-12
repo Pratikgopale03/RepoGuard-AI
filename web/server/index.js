@@ -205,10 +205,15 @@ app.post('/api/upgrade-plan', (req, res) => {
   if(!payload) return;
   const users = loadUsers();
   const email = (payload.sub || '').toLowerCase();
-  if(!email || !users[email]) return res.status(404).json({ error: 'User not found' });
-  users[email].plan = 'pro';
+  if(!email) return res.status(400).json({ error: 'Invalid payload' });
+  if(!users[email]) {
+    users[email] = { email, password_hash: '', plan: 'pro' };
+  } else {
+    users[email].plan = 'pro';
+  }
   saveUsers(users);
-  const token = jwt.encode({ sub: email, plan: 'pro', iat: Date.now() }, JWT_SECRET);
+  const now = Math.floor(Date.now() / 1000);
+  const token = jwt.encode({ sub: email, plan: 'pro', iat: now, exp: now + 60*60*24*7 }, JWT_SECRET);
   res.json({ token, plan: 'pro' });
 });
 
