@@ -330,9 +330,7 @@ def handle_query_token() -> None:
         email = payload.get("sub")
         st.session_state["jwt"] = tok
         st.session_state["user_email"] = email
-        from auth import get_user
-        user = get_user(email)
-        st.session_state["user_plan"] = user.get("plan", "free") if user else "free"
+        st.session_state["user_plan"] = payload.get("plan", "free")
         if repo:
             st.session_state["prefill_repo"] = repo
         try:

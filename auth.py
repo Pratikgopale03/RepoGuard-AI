@@ -60,7 +60,7 @@ def create_jwt(email: str, plan: str) -> str:
 
 def decode_jwt(token: str) -> Optional[dict]:
     try:
-        return jwt.decode(token, JWT_SECRET, algorithms=[JWT_ALGORITHM])
+        return jwt.decode(token, JWT_SECRET, algorithms=[JWT_ALGORITHM], options={"verify_iat": False})
     except jwt.ExpiredSignatureError:
         return None
     except jwt.InvalidTokenError:
