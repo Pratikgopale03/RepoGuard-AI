@@ -1,0 +1,30 @@
+# Node / React
+node_modules/
+dist/
+build/
+.npm/
+
+# Python / Streamlit
+__pycache__/
+*.pyc
+.pytest_cache/
+venv/
+env/
+.venv/
+
+# Environment Variables (CRITICAL: DO NOT PUSH SECRETS)
+.env
+.env.local
+.env.*.local
+web/server/.env
+
+# Local Database & User Data
+repoguard.db
+.users.json
+.usage.json
+
+# IDE / OS Files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

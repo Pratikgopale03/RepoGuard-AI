@@ -1,0 +1,5 @@
+
+> repoguard-web@0.1.0 api
+> node ./server/index.js
+
+Auth API running on port 5174
